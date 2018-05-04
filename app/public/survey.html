@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+
+        <div class="page-header">
+            <h1 class="text-center">Survey Questions</h1>
+            <hr>
+            <h2 class="text-left">About You</h2>
+
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <h3>Name (Required)</h3><input type="text" class="form-control" id="name">
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Link to Photo Image (Required)</h3><input type="text" class="form-control" id="photo">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <h3>Question 1</h2>
+        <h4>You enjoy doing things on a whim.</h3>
+        <select class="selection" id="q1">
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (strongly Agree)</option>
+        </select>
+           
+        <h3><strong>Question 2</strong></h2>
+        <h4>You're always thinking about how others may view you.</h3>
+            <select class="selection" id="q2">
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (strongly Agree)</option>
+            </select>
+
+        <h3><strong>Question 3</strong></h2>
+        <h4>Nothing matters more than being with friends and family.</h3>
+            <select class="selection" id="q3">
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (strongly Agree)</option>
+            </select>
+        
+        <h3><strong>Question 4</strong></h2>
+        <h4>Why go out, when you can stay at home.</h3>
+            <select class="selection" id="q4">
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (strongly Agree)</option>
+            </select>
+        
+        <h3><strong>Question 5</strong></h2>
+        <h4>You always consider others feelings before you speak.</h3>
+            <select class="selection" id="q5">
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (strongly Agree)</option>
+            </select>
+        
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary submit">Submit</button>
+            </div>
+            <hr>
+            <footer class="footer">
+                <div class="container">
+                    <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/Mmgray/FriendFinder">GitHub Rep</a>
+                    </p>
+                </div>
+            </footer>
+        <!-- Modal -->
+<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="nameMatch">Your Match</h4>
+              <a href="#" id="photoMatch"></a>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+        $("#submit").on("click", function(event) {
+            event.preventDefault();
+        });
+        var userInfo = {
+            name: $("#name").val().trim(),
+            photo: $("#photo").val().trim(),
+            scores: [
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val() 
+                
+            ]
+        };
+
+        $.post("/api/friends", userInfo, function(data){
+            for (var i = 0; i < scores.length; i++) {
+            sum += scores[i]
+            if (userInfo.scores === friendsArray.scores){
+    
+        $("#nameMatch").text(data.name);
+            $("#photoMatch").attr("src", data.photo);
+            $("#modalResults").modal("toggle");
+}
+}
+        });
+</script>
+</body>
+</html>
+
